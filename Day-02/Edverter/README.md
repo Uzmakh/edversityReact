@@ -31,19 +31,19 @@ Currently, two official plugins are available:
 
 - Understanding The React Flow:
 
-App.jsx    =>    main.jsx     =>     index.html    =>     Browser Display
+       App.jsx    =>    main.jsx     =>     index.html    =>     Browser Display
 
-Writing components in separate files as Header.jsx, Footer.jsx, About.jsx, etc.
+       Writing components in separate files as Header.jsx, Footer.jsx, About.jsx, etc.
 
-And Importing them into the App.jsx,
+       And Importing them into the App.jsx,
 
-And from App.jsx to main.jsx,
+       And from App.jsx to main.jsx,
 
-Rendering from main.jsx through id='root'to  index.html
+       Rendering from main.jsx through id='root'to  index.html
 
-index.html has a div which has id='root'
+       index.html has a div which has id='root'
 
-And finally 'root' is responsible for giving a UI
+       And finally 'root' is responsible for giving a UI
 
 - Removing the extra code from App.jsx to create our own component.
 
@@ -55,13 +55,13 @@ And finally 'root' is responsible for giving a UI
 
 - A single div can be rendered in a component. To pass multiple tags or divs they must be wrapped into a single div or empty tag called Fragment.
 
-   Fragment <>  </> is recommended instead of creating extra divs.
+     Fragment <>  </> is recommended instead of creating extra divs.
 
 - Self-created components are imported in App.jsx
 
-So create a Header.jsx (component) and import it in App.jsx
+      So create a Header.jsx (component) and import it in App.jsx
 
-Use <Header /> in App.jsx to return
+       Use <Header/> in App.jsx to return
 
 - Remove the App.css styling to write our own CSS to style our component(Header.jsx)
 
