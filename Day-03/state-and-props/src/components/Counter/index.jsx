@@ -1,6 +1,3 @@
-// import { useState } from "react";
-
-
 function Counter(props) {
   let count = props.count
   let setCount = props.setCount
