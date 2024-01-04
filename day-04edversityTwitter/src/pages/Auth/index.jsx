@@ -1,18 +1,18 @@
 import { useState } from 'react'
-import SignIn from '../../components/Sign-in'
-import SignUp from '../../components/Sign-up'
+import Login from '../../components/Login'
+import Register from '../../components/Register'
 import './index.css'
 
 function Auth() {
-    const [isSignUp, setIsSignUp] = useState(true);
+    const [isRegister, setIsRegister] = useState(true);
     const switchState = () => {
-        const currentSignUpState = !isSignUp;
-        setIsSignUp(currentSignUpState);
+        const currentRegisterState = !isRegister;
+        setIsRegister(currentRegisterState);
     };
     return (
         <div className='container'>
             {
-                isSignUp == true ? (<SignIn switchState={switchState} />) : (<SignUp switchState={switchState} />)
+                isRegister == true ? (<Login loginState={switchState} />) : (<Register registerState={switchState} />)
             }
           
         </div>

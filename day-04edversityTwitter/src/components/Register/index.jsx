@@ -1,17 +1,17 @@
 import './index.css'
-function SignUp({ signUpState }) {
+function Register({ registerState }) {
     return (
-            <div className='signin'>
-                <h3>Sign-Up to your Account</h3>
-                <form className='signin_form'>
+            <div className='login'>
+                <h3>Register to your Account</h3>
+                <form className='login_form'>
                     <input type="name" className='input_field' placeholder="Type your name here" />
                     <input type="email" className='input_field' placeholder="Type your email here" />
                     <input type="password" className='input_field' placeholder="Type your password here" />
                     <input type="password" className='input_field' placeholder="Confirm your password" />
-                <input type="Submit" className='input_btn' value={"SignUp"} />
+                <input type="Submit" className='input_btn' value={"Register"} />
                 </form>
         <p>Already have an account? {""}
-          <span onClick={signUpState}className='signin_switch'>Sing In</span>
+          <span onClick={registerState} className='login_switch'>Log In</span>
                 </p>
             </div>
         )
@@ -19,4 +19,4 @@ function SignUp({ signUpState }) {
 
    
 
-export default SignUp;
+export default Register;
