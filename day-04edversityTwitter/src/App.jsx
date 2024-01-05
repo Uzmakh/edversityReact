@@ -1,15 +1,18 @@
-// import Auth from './pages/Auth'
+import { useState } from 'react'
+import Auth from './pages/Auth'
 import Home from './pages/Home'
-// import './App.css'
+
 
 function App() {
- 
-
+  const [isAuth, setAuth] = useState(false);
+  const toggleState = () => {
+    setAuth(!isAuth);
+}
   return (
-    <>
-      {/* <Auth /> */}
-      <Home />
-    </>
+    <div>
+      <button onClick={toggleState}>Toggle Auth State</button>
+     {isAuth ? <Home /> : <Auth />}
+    </div>
   )
 }
 
