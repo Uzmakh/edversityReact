@@ -1,0 +1,40 @@
+.container {
+    width: 80%;
+    margin: 50px auto;
+    text-align: center;
+}
+
+.container form {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+input {
+    height: 32px;
+}
+
+.basic {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.credential {
+    width: 70%;
+    margin: 50px auto;
+}
+
+.basic textarea {
+    resize: none;
+    height: 120px;
+}
+
+.input_btn {
+    margin-top: 30px;
+    padding: 5px 0px 10px 0px;
+    background-color: #2980b9;
+    outline: none;
+    border: 2px solid #2980b9;
+    font-size: 20px;
+    color: #fff;
+}
