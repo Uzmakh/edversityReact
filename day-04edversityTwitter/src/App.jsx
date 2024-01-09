@@ -10,19 +10,20 @@ function App() {
   // }
 
   const [products, setProducts] = useState([]);
+  const [loading, setLoading] = useState(false);
 
   useEffect(() => {
     // console.log("use Effect - callonce")
     // API Call
 
-    fetch('https://dummyjson.com/products')
-      .then((res) => {
-      return res.json();
-      })
-      .then((result) => {
-        console.log(result.products);
-          setProducts(result.products)
-      }) ;
+    // fetch('https://dummyjson.com/products')
+    //   .then((res) => {
+    //   return res.json();
+    //   })
+    //   .then((result) => {
+    //     console.log(result.products);
+    //       setProducts(result.products)
+    //   }) ;
 
   }, []);
   // useEffect(() => {
@@ -35,6 +36,18 @@ function App() {
   //   setNumber(newNumber);
   // }
 
+  const fetchProducts = () => {
+    setLoading(true);
+    fetch('https://dummyjson.com/products')
+      .then((res) => {
+      return res.json();
+      })
+      .then((result) => {
+        setProducts(result.products);
+        setLoading(false);
+      }) ;
+  }
+
   return (
     <div>
       {/* <button onClick={toggleState}>Toggle Auth State</button>
@@ -43,6 +56,9 @@ function App() {
 
       {/* <p>{number}</p>
       <button onClick={updateNumber}>Update Number</button> */}
+      <button onClick={fetchProducts}>Fetch Products</button>
+      {loading == true ?
+        <p>Loading...</p> : ""}
       {products.map((products, index) => {
         return (
           <div key={index}>
@@ -51,9 +67,11 @@ function App() {
             <p> Description: {products.description}</p>
             <p> Price: {products.price}</p>
             <p> Brand: {products.brand}</p>
-            </div>
-        )
-      })}
+          </div>
+        );
+      })
+      }
+    
      
       {/* <Auth/> */}
       {/* <Home /> */}
