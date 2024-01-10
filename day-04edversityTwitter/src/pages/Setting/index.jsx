@@ -4,7 +4,7 @@ import classes from './index.module.css'
 
 
 function Setting() {
-  const [confirmationState, setConfirmationState] = useState(false);
+  const [confirmationState, setConfirmationState] = useState(true);
   const [name, setName] = useState("name");
   const [description, setDescription] = useState(" Lorem, ipsum dolor sit amet consectetur adipisicing elit. Quia impedit repellat qui. Laudantium, quos minus voluptate, earum minima, quasi modi error voluptas quidem corrupti sed");
   const [oldPassword, setOldPassword] = useState(" ");
@@ -18,9 +18,22 @@ function Setting() {
         <h2>Basic Info</h2>
         <form className={classes.basic}>
           <input type="text"  placeholder="Enter your name" onChange={((e) => setName(e.target.value))} />
-          <textarea  placeholder="Enter your bio here.." onChange={((e)=>setDescription(e.target.value))}>
+          <textarea  placeholder="Enter your bio here..." onChange={((e)=>setDescription(e.target.value))}>
           </textarea>
-          <input className={classes.input_btn} type="submit" value="Update" />
+          <input className={classes.input_btn} type="submit" value="Update Info"
+            onClick={() => setConfirmationState(false)}/>
+        
+          {confirmationState && (
+            <div className={classes.basic_confirmation}>
+              <input className={classes.yes_btn} type="button" value="Yes" />
+              <input
+                className={classes.no_btn}
+                onClick={() => setConfirmationState(false)}
+                type="button"
+                value="No"
+              />
+            </div>
+          )}
         </form>
 
         <h2>Update Password</h2>

@@ -38,3 +38,26 @@ input {
     font-size: 20px;
     color: #fff;
 }
+.basic_confirmation{
+    display: flex;
+   flex-direction: row; justify-content: space-between;
+  align-items: center;
+   gap: 10px;
+}
+.basic_confirmation input{
+    width: 50%;
+  }
+  .basic_confirmation .yes_btn{
+      background-color: #2980b9;
+    outline: none;
+  border: none;
+  font-size: 18px;
+  color: white;
+  }
+  .basic_confirmation .no_btn{
+      background-color: #e74c3c;
+    outline: none;
+  border: none;
+  font-size: 18px;
+  color: white;
+  }

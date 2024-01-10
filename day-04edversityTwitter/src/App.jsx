@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react'
 import Auth from './pages/Auth'
 import Home from './pages/Home'
+import Followers from './pages/Followers/index.jsx'
 import Setting from './pages/Setting/index.jsx'
 
 
@@ -11,7 +12,8 @@ function App() {
     <div>
     {/* <Auth/> */}
       {/* <Home /> */}
-      <Setting/>
+      {/* <Setting /> */}
+      <Followers/>
     </div>
 
   )
