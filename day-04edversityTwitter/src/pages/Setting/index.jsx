@@ -15,13 +15,14 @@ function Setting() {
     <>
       <Nav />
       <div className={classes.container}>
+        
         <h2>Basic Info</h2>
         <form className={classes.basic}>
-          <input type="text"  placeholder="Enter your name" onChange={((e) => setName(e.target.value))} />
-          <textarea  placeholder="Enter your bio here..." onChange={((e)=>setDescription(e.target.value))}>
+          <input type="text"  placeholder="Enter your name" onChange={(e) => setName(e.target.value)} />
+          <textarea placeholder="Enter your bio here..." onChange={(e)=>setDescription(e.target.value)}>
           </textarea>
           <input className={classes.input_btn} type="submit" value="Update Info"
-            onClick={() => setConfirmationState(false)}/>
+            onClick={() => setConfirmationState(true)}/>
         
           {confirmationState && (
             <div className={classes.basic_confirmation}>
@@ -38,9 +39,9 @@ function Setting() {
 
         <h2>Update Password</h2>
         <form className={classes.credential}>
-          <input type="password"  placeholder="Old Password" onChange={((e)=>setOldPassword(e.target.value))}/>
-          <input type="password"  placeholder="New Password" onChange={((e) => setNewPassword(e.target.value))} />
-          <input type="password"  placeholder="Confirm New Password" onChange={((e)=>setConfirmNewPassword(e.target.value))}/>
+          <input type="password"  placeholder="Old Password" onChange={(e)=>setOldPassword(e.target.value)}/>
+          <input type="password"  placeholder="New Password" onChange={(e) => setNewPassword(e.target.value)} />
+          <input type="password"  placeholder="Confirm New Password" onChange={(e)=>setConfirmNewPassword(e.target.value)}/>
 
           <input className={classes.input_btn} type="submit" value="Update Password" />
         </form>

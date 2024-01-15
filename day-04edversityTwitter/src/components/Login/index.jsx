@@ -13,7 +13,7 @@ function Login({ loginState }) {
     const validEmail = email.trim();
 
     if (!validEmail) {
-      setErrorMessage("Please enter your email.")
+      setErrorMessage("Please enter your email")
     } else {
       setErrorMessage("Please enter your password")
     }

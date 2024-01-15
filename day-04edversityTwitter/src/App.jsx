@@ -10,10 +10,10 @@ function App() {
 
   return (
     <div>
-    {/* <Auth/> */}
+    <Auth/>
       {/* <Home /> */}
       {/* <Setting /> */}
-      <Followers/>
+      {/* <Followers/> */}
     </div>
 
   )
