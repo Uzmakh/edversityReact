@@ -6,7 +6,7 @@ function Register({ registerState }) {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [confirmPassword, setConfirmPassword] = useState("");
-  // const [showErrorMessage, setShowErrorMessage] = useState(false);
+  // const [showErrorMessage, setShowErrorMessage] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
 
   const submitHandler = (e) => {
