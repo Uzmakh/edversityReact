@@ -1,34 +1,30 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
+import {useState} from 'react'
+import { Route, Routes, Navigate } from 'react-router-dom'
+import Auth from './pages/Auth'
+import Home from './pages/Home'
+import Product from './pages/Product'
+import Products from './pages/Products'
 import './App.css'
 
-function App() {
-  const [count, setCount] = useState(0)
 
+function App() {
+  const [authenticated, setUserAuthentication] = useState(true)
+  
+  const toggleAuth = () => {
+    setUserAuthentication(!authenticated)
+  }
   return (
     <>
-      <div>
-        <a href="https://vitejs.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
+      <button onClick={toggleAuth}>Toggle Authentication</button>
+      <p>Current Auth Status: {authenticated.toString()}</p>
+
+    <Routes>
+      <Route path="/home" element={authenticated ? <Home/> : <Navigate replace to="/auth"/>} />
+      <Route path="/auth" element={<Auth />} />
+      <Route path="/products/:id" element={<Product />} />
+      <Route path="/products" element={<Products />} />
+      </Routes>
+      </>
   )
 }
 
