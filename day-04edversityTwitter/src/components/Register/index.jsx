@@ -12,7 +12,7 @@ function Register({ registerState }) {
   const submitHandler = (e) => {
     e.preventDefault();
     // console.log("Name", name)
-    // console.log("Email", ElementInternals)
+    // console.log("Email", email)
     // console.log("Password", password)
     // console.log("Confirm Password", confirmPassword)
 
@@ -78,7 +78,5 @@ function Register({ registerState }) {
     </div>
   )
 }
-
-
 
 export default Register

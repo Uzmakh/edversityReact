@@ -1,4 +1,5 @@
 import classes from './index.module.css'
+
 function Nav() {
     return (
         <nav>
