@@ -3,30 +3,30 @@ import classes from './index.module.css'
 
 
 function Followings() {
-    const followers = [
+    const followings = [
         {
-            name: "John Doe",
-            handle: "@johndoe"
+            name: "Shamsheer Ali",
+            handle: "@shamsheer"
         },
         {
-            name: "John Doe",
-            handle: "@johndoe"
+            name: "Ahmed Sohail",
+            handle: "@sohail"
         },
         {
-            name: "John Doe",
-            handle: "@johndoe"
+            name: "Dilawar Khan",
+            handle: "@dilawar"
         },
     ];
     return (
         <>
             <Nav />
             <div className={classes.container}>
-                <h2>Followers</h2>
-                {followings.map((followings, index) => {
+                <h2>Followings</h2>
+                {followings.map((following, index) => {
                     return (
-                        <div key={index} className={classes.followings}>
-                            <h3>{followings.name}</h3>
-                            <p>{followings.handle}</p>
+                        <div key={index} className={classes.following}>
+                            <h3>{following.name}</h3>
+                            <p>{following.handle}</p>
                         </div>
                     );
                 })}
