@@ -1,15 +1,38 @@
 import classes from './index.module.css'
+import {Link} from 'react-router-dom'
 
 function Nav() {
+    const navLinks = [
+        {
+            placeholder: "Home",
+            path: "/home",
+        },
+        {
+            placeholder: "Followers",
+            path: "/home/followers",
+        },
+        {
+            placeholder: "Followings",
+            path: "/home/followings",
+        },
+        {
+            placeholder: "Settings",
+            path: "/setting",
+        },
+        {
+            placeholder: "Sign out",
+            path: "/",
+        },
+    ];
     return (
         <nav>
             <h1 className={classes.logo}>Edverter</h1>
             <ul className={classes.list_items}>
-                <li className={classes.list_item}>Home</li>
-                <li className={classes.list_item}>Followers</li>
-                <li className={classes.list_item}>Followings</li>
-                <li className={classes.list_item}>Settings</li>
-                <li className={classes.list_item}>Sign Out</li>
+          {navLinks.map((navlink, index) => (
+            <li className={classes.list_item} key={index}>
+              <Link to={navlink.path}>{navlink.placeholder}</Link>
+            </li>
+          ))}
             </ul>
         </nav>)
 }
