@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import { createUserWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase'; 
 import classes from './index.module.css'
 
 function Register({ registerState }) {
@@ -9,7 +11,7 @@ function Register({ registerState }) {
   // const [showErrorMessage, setShowErrorMessage] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
 
-  const submitHandler = (e) => {
+  const submitHandler = async(e) => {
     e.preventDefault();
     // console.log("Name", name)
     // console.log("Email", email)
@@ -53,6 +55,12 @@ function Register({ registerState }) {
 
     if (updatedErrorMessages.length == 0) {
       console.log("Form submitted!");
+      try {
+        const user = await createUserWithEmailAndPassword(auth, email, password);
+        console.log(user);
+        } catch (error) {
+        console.log(error);
+      }
     }
   }
 
