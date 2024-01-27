@@ -1,6 +1,6 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
 import { auth } from '../../firebase';
 import classes from './index.module.css'
 
@@ -10,6 +10,8 @@ function Login({ loginState }) {
   // console.log(loginState);
 
   const navigate = useNavigate();
+  const [isLoggedIn, setIsLoggedIn] = useState(true);
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
@@ -29,12 +31,12 @@ function Login({ loginState }) {
     // As the above errorMessage is async, I am using this
     if (!errMessage) {
       try {
-        const user = await signInWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        const res = await signInWithEmailAndPassword(auth, email, password);
+        console.log(res.user.uid);
         navigate("/home");
       } catch (error) {
-        console.log(error.code);
-        console.log(error.message);
+        // console.log(error.code);
+        // console.log(error.message);
         if (error.code == "auth/invalid-credential") {
           setErrorMessage("Invalid Credentails!");
         }
@@ -42,6 +44,16 @@ function Login({ loginState }) {
     }
   };
 
+  useEffect(() => {
+    onAuthStateChanged(auth, (user) => {
+      if (user) {
+        navigate("/home");
+      } else {
+        console.log("User is not logged in!");
+        setIsLoggedIn(false);
+      }
+    });
+  }, []);
 
   return (
     <div className={classes.login}>
