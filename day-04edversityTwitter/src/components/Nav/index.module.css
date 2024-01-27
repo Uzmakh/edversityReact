@@ -21,9 +21,14 @@ nav .list_items .list_item{
    margin: 20px;
    list-style: none;
    font-size: 25px;
- 
+ color: #fff;
 }
-navLinks{
-  text-decoration: none;
-  color: #fff;
+.input_btn{
+  margin-top: 30px ;
+padding: 25px 0px;
+line-height: 0px;
+background-color: #2980b9;
+outline: none;
+border: 2px solid #2980b9;
+font-size: 25px;
 }

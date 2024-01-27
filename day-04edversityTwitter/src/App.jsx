@@ -7,6 +7,7 @@ import Followings from "./pages/Followings";
 
 import "./App.css";
 function App() {
+   console.log(import.meta.env);
    return (
       <>
          <Routes>

@@ -13,11 +13,12 @@ padding: 12px 15px;
 }
 .input_btn{
   margin-top: 30px ;
-padding: 5px 0px;
+padding: 25px 0px;
+line-height: 0px;
 background-color: #2980b9;
 /* outline: none; */
 border: 1px solid #2980b9;
-font-size: 20px;
+font-size: 25px;
 color: #fff;
 }
 .login_switch{
@@ -25,4 +26,12 @@ color: #fff;
     font-weight: bold;
     text-transform: uppercase;
     cursor: pointer;
+}
+.error {
+  background-color: #e74c3c;
+  color: white;
+  border: 2px solid #a42c1f;
+  padding: 5px;
+  border-radius: 2px;
+  text-align: center;
 }

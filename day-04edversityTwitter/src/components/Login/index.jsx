@@ -1,44 +1,59 @@
 import { useState } from 'react';
+import { useNavigate } from "react-router-dom";
+import { signInWithEmailAndPassword } from 'firebase/auth';
+import { auth } from '../../firebase';
 import classes from './index.module.css'
+
+
 function Login({ loginState }) {
   // const { loginState } = props;
   // console.log(loginState);
 
+  const navigate = useNavigate();
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-
-  const onLogin = (e) => {
+  const onLogin = async (e) => {
     e.preventDefault();
+    let errMessage = "";
     const validEmail = email.trim();
 
-    if (!validEmail) {
-      setErrorMessage("Please enter your email")
-    } else {
-      setErrorMessage("Please enter your password")
+    if (validEmail.length == 0) {
+      errMessage = "Please write your email!";
+    } else if (password.length == 0) {
+      errMessage = "Please write your password";
     }
 
-    setErrorMessage('');
-    //   console.log("Email -", email)
-    // console.log("Password -", password)
-  }
-  // .addEventListener('onSubmit', (event) {
+    setErrorMessage(errMessage);
 
-  // })
-  const updateEmail = () => {
+    // As the above errorMessage is async, I am using this
+    if (!errMessage) {
+      try {
+        const user = await signInWithEmailAndPassword(auth, email, password);
+        console.log(user);
+        navigate("/home");
+      } catch (error) {
+        console.log(error.code);
+        console.log(error.message);
+        if (error.code == "auth/invalid-credential") {
+          setErrorMessage("Invalid Credentails!");
+        }
+      }
+    }
+  };
 
-  }
+
   return (
     <div className={classes.login}>
       <h3>Login to your Account</h3>
-      {errorMessage ? <p>{errorMessage}</p> : ""}
+      {errorMessage ? <p className={classes.error}>{errorMessage}</p> : ""}
       <form
         onSubmit={(e) => { onLogin(e) }}
         className={classes.login_form}>
         
         <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="email" className={classes.input_field} placeholder="Type your email here" />
         <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" className={classes.input_field} placeholder="Type your password here" />
-        <input type="Submit" className={classes.input_btn} value={"Login"} />
+        <input type="submit" className={classes.input_btn} value={"Login"} />
       </form>
       <p>Don't have an account? {""}
         <span onClick={
