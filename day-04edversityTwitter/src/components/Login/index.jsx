@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useNavigate } from "react-router-dom";
-import { signInWithEmailAndPassword, onAuthStateChanged } from 'firebase/auth';
+import { signInWithEmailAndPassword, onAuthStateChanged, GoogleAuthProvider, signInWithPopup } from 'firebase/auth';
 import { auth } from '../../firebase';
 import classes from './index.module.css'
 
@@ -12,10 +12,24 @@ function Login({ loginState }) {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(true);
 
+  const provider = new GoogleAuthProvider();
+
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [errorMessage, setErrorMessage] = useState(false);
-  const onLogin = async (e) => {
+
+  const onGoogleLogin = () => {
+    signInWithPopup(auth, provider)
+      .then((result) => {
+        const user = result.user;
+        console.log(user);
+      })
+      .catch((error) => {
+        console.log(error);
+    })
+}
+
+const onLogin = async (e) => {
     e.preventDefault();
     let errMessage = "";
     const validEmail = email.trim();
@@ -35,11 +49,12 @@ function Login({ loginState }) {
         console.log(res.user.uid);
         navigate("/home");
       } catch (error) {
-        // console.log(error.code);
-        // console.log(error.message);
+        // console.log(error.errorCode);
+        // console.log(error.errorMessage);
         if (error.code == "auth/invalid-credential") {
           setErrorMessage("Invalid Credentails!");
         }
+        setErrorMessage('');
       }
     }
   };
@@ -64,7 +79,15 @@ function Login({ loginState }) {
         className={classes.login_form}>
         
         <input value={email} onChange={(e) => { setEmail(e.target.value) }} type="email" className={classes.input_field} placeholder="Type your email here" />
+
         <input value={password} onChange={(e) => { setPassword(e.target.value) }} type="password" className={classes.input_field} placeholder="Type your password here" />
+
+        <input
+          onClick={onGoogleLogin}
+          className={classes.input_google_btn}
+          type="button"
+          value={"Sign in with Google"}
+        />
         <input type="submit" className={classes.input_btn} value={"Login"} />
       </form>
       <p>Don't have an account? {""}
