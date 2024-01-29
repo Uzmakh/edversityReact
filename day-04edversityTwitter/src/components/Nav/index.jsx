@@ -51,7 +51,9 @@ function Nav() {
               <li className={classes.list_item} key={index}>
                   {
                       navlink.isLink ? (
-                          <Link to={navlink.path}>{navlink.placeholder}</Link>
+                  <Link to={navlink.path}>
+                    className={ ({isActive}) => (isActive ? 'active' : '')}
+                    {navlink.placeholder}</Link>
                       ) : <button className={classes.input_btn} onClick={logoutHandler}>Sign Out</button>
                   }
               
