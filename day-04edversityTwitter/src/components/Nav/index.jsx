@@ -52,7 +52,7 @@ function Nav() {
                   {
                       navlink.isLink ? (
                   <Link to={navlink.path}>
-                    className={ ({isActive}) => (isActive ? 'active' : '')}
+                    className={ ({isActive}) => (isActive ? classes.active : '')}
                     {navlink.placeholder}</Link>
                       ) : <button className={classes.input_btn} onClick={logoutHandler}>Sign Out</button>
                   }
