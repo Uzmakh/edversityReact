@@ -18,6 +18,7 @@ outline: none;
 border: 2px solid #2980b9;
 font-size: 25px;
 color: #fff;
+cursor: pointer;
 }
 .login_switch{
     text-decoration: underline;

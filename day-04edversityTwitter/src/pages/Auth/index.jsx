@@ -1,22 +1,52 @@
-import { useState } from 'react'
+import { useState, useEffect } from 'react'
 import Login from '../../components/Login'
 import Register from '../../components/Register'
+import { useNavigate } from "react-router-dom";
+import { onAuthStateChanged } from "firebase/auth";
+import { auth } from "../../firebase";
 import classes from './index.module.css'
 
 function Auth() {
+    const navigate = useNavigate();
     const [isRegister, setIsRegister] = useState(true);
+    const [isAuth, setAuth] = useState(true);
+    const [isInMiddleOfRegistration, setIsInMiddleOfRegistration] =
+        useState(false);
     
     const switchState = () => {
         const currentRegisterState = !isRegister;
         setIsRegister(currentRegisterState);
     };
-    return (
-        <div className={classes.container}>
-            {
-                isRegister == true ? (<Login loginState={switchState} />) : (<Register registerState={switchState} />)
-            }
 
+    useEffect(() => {
+        onAuthStateChanged(auth, (user) => {
+            if (user && !isInMiddleOfRegistration) {
+                navigate("/home");
+            } else {
+                console.log("User is not logged in!");
+                setAuth(false);
+            }
+        });
+    }, []);
+
+    
+
+  return (
+    <>
+      {!isAuth && (
+        <div className={classes.container}>
+          {isRegister == true ? (
+            <Login loginState={switchState} />
+          ) : (
+            <Register
+              setIsInMiddleOfRegistration={setIsInMiddleOfRegistration}
+              registerState={switchState}
+            />
+          )}
         </div>
-    )
+      )}
+    </>
+  );
 }
+
 export default Auth;

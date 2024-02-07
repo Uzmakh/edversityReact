@@ -5,12 +5,15 @@ import { onAuthStateChanged } from "firebase/auth";
 import { auth } from "../../firebase";
 import { useEffect, useState } from "react";
 import { useNavigate } from 'react-router-dom';
+import { getDatabase, ref, onValue } from "firebase/database";
 import classes from './index.module.css'
-
 
 function Home() {
   const navigate = useNavigate();
   const [isLoggedIn, setIsLoggedIn] = useState(false);
+  const [userID, setUserID] = useState(null);
+  const [userData, setUserData] = useState();
+
   const tweetData = [
     {
       title: "My first tweet",
@@ -43,6 +46,7 @@ function Home() {
       if (user) {
         const uid = user.uid;
         console.log(uid);
+        setUserID(uid);
         setIsLoggedIn(true);
         // console.log("User is Logged In!")
       } else {
@@ -52,6 +56,16 @@ function Home() {
     });
   }, []);
 
+  useEffect(() => {
+    const db = getDatabase();
+    const userDataRef = ref(db, "users/" + userID);
+    onValue(userDataRef, (snapshot) => {
+      console.log(snapshot.val());
+      const data = snapshot.val();
+      setUserData(data);
+    })
+  }, [userID])
+
   return (
     <>
       {isLoggedIn ? (
@@ -59,7 +73,7 @@ function Home() {
         {""}
         < Nav />
         <div className={classes.container}>
-          <Profile />
+          <Profile basicInfo={userData}/>
           {tweetData.map((item, index) => {
             return <Tweet key={index} item={item} />;
           }

@@ -1,9 +1,10 @@
 import { useState } from 'react';
 import { createUserWithEmailAndPassword } from 'firebase/auth';
-import { auth } from '../../firebase'; 
+import { auth } from '../../firebase';
+import { getDatabase, set, ref } from "firebase/database" 
 import classes from './index.module.css'
 
-function Register({ registerState }) {
+function Register({ registerState, setIsInMiddleOfRegistration } ) {
   const [name, setName] = useState("");
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
@@ -11,7 +12,8 @@ function Register({ registerState }) {
   // const [showErrorMessage, setShowErrorMessage] = useState("");
   const [errorMessages, setErrorMessages] = useState([]);
 
-  const submitHandler = async(e) => {
+  const submitHandler = async (e) => {
+    setIsInMiddleOfRegistration(false);
     e.preventDefault();
     // console.log("Name", name)
     // console.log("Email", email)
@@ -56,10 +58,26 @@ function Register({ registerState }) {
     if (updatedErrorMessages.length == 0) {
       console.log("Form submitted!");
       try {
-        const user = await createUserWithEmailAndPassword(auth, email, password);
-        console.log(user);
+        const res = await createUserWithEmailAndPassword(auth, email, password);
+      
+        // console.log(db);
+        // console.log(user);
+        
+        // Save the user info to database
+        // To target realtime database
+        const db = getDatabase();
+        set(ref(db, "users/" + res.user.uid), {
+          name: name,
+          bio: "AGHDKAJAHDKJFLKEJRHJRTHU",
+          followers: 0,
+          followings: 0,
+        });
+
+        setIsInMiddleOfRegistration(false);
+        alert('User Authenticated!')
         } catch (error) {
         console.log(error);
+        setIsInMiddleOfRegistration(false);
       }
     }
   }
@@ -80,7 +98,7 @@ function Register({ registerState }) {
         <input type="password" className={classes.input_field} value={confirmPassword} onChange={(e) => setConfirmPassword(e.target.value)} placeholder="Confirm your password" />
         <input type="Submit" className={classes.input_btn} value={"Register"} />
       </form>
-      <p>Already have an account? {""}
+      <p>Already have an account?
         <span onClick={registerState} className={classes.login_switch}>Log In</span>
       </p>
     </div>
