@@ -71,6 +71,7 @@ function Register({ registerState, setIsInMiddleOfRegistration } ) {
           bio: "AGHDKAJAHDKJFLKEJRHJRTHU",
           followers: 0,
           followings: 0,
+          tweets: { }
         });
 
         setIsInMiddleOfRegistration(false);

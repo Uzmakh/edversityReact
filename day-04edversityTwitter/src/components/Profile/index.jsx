@@ -2,7 +2,7 @@ import { useState, useEffect } from "react";
 import classes from './index.module.css'
 
 function Profile({ basicInfo }) {
-  console.log("Basic Info - ", basicInfo);
+  // console.log("Basic Info - ", basicInfo);
   const [userInfo, setUserInfo] = useState({
     name: "",
     followers: 0,
@@ -11,7 +11,7 @@ function Profile({ basicInfo }) {
   })
 
   useEffect(() => {
-    console.log("Basic Info - ", basicInfo);
+    // console.log("Basic Info - ", basicInfo);
     if (basicInfo) {
       console.log("Ready to show!")
       setUserInfo(basicInfo);
